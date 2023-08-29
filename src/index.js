@@ -1,17 +1,36 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDom from "react-dom";
+import "./index.css";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+import { books } from "./books";
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+function BookList() {
+  return (
+    <>
+      <h1 className="main ">Book List</h1>
+      <section className="booklist">
+        {books.map((book, index) => {
+          return <Book key={book.id} {...book}></Book>;
+        })}
+      </section>
+    </>
+  );
+}
+const Book = (props) => {
+  const handleButton = () => {
+    return alert("The button is pressed ");
+  };
+  const { img, title, author } = props;
+  return (
+    <article className="book">
+      <img src={img} alt="" />
+      <h4>{title} </h4>
+      <h1>{author}</h1>
+      <button type="button" onClick={() => handleButton(author)}>
+        Button
+      </button>
+    </article>
+  );
+};
+
+ReactDom.render(<BookList />, document.getElementById("root"));
